@@ -37,17 +37,17 @@ bool comparadorFechasEq(vector<string>&fecha1,vector<string>&fecha2){
 	return false;
 }
 
-//Hace el ˙ltimo paso despuÈs de ordenar por mergesort recursivamente
-// Par·metros:
+//Hace el √∫ltimo paso despu√©s de ordenar por mergesort recursivamente
+// Par√°metros:
 // array: vector de datos a ordenar
 // l: limite izquierdo
 // m: punto medio
 // r: limite derecho
 // Valor de retorno: no hay
-// Big Omega: Omega(n) El mejor caso es cuando el vector ya est· ordenado asÌ que solo se ejecutan n/2 + 1 pasos,
+// Big Omega: Omega(n) El mejor caso es cuando el vector ya est√° ordenado as√≠ que solo se ejecutan n/2 + 1 pasos,
 // pues la otra mitad de los datos se inserta de golpe
 // Big Theta: Theta(n)
-// Big O: O(n) el peor caso es cuando el vector est· intercalado y se tienen que insertar un dato de un subconjunto y otro del otro
+// Big O: O(n) el peor caso es cuando el vector est√° intercalado y se tienen que insertar un dato de un subconjunto y otro del otro
 // donde se deben de hacer n pasos
 void merge(vector<vector<string>>&array, const int &l, const int &m, const int &r) {
    int i, j, k, nl, nr,aux;
@@ -89,16 +89,16 @@ void merge(vector<vector<string>>&array, const int &l, const int &m, const int &
 }
 
 //Ordena recursivamente con mergeSort
-// Par·metros:
+// Par√°metros:
 // array: vector de datos a ordenar
 // p: limite izquierdo
 // r: limite derecho
 // Valor de retorno: no hay
-// Big Omega: Omega(n lg(n)) El mejor caso es cuando el vector ya est· ordenado asÌ que solo se ejecutan n/2 + 1 pasos,
-// pues la otra mitad de los datos se inserta de golpe, pero a˙n asÌ se dividen en dos el n˙mero de elementos 
+// Big Omega: Omega(n lg(n)) El mejor caso es cuando el vector ya est√° ordenado as√≠ que solo se ejecutan n/2 + 1 pasos,
+// pues la otra mitad de los datos se inserta de golpe, pero a√∫n as√≠ se dividen en dos el n√∫mero de elementos 
 // Big Theta: Theta(n lg(n))
-// Big O: O(n lg(n)) el peor caso es cuando el vector est· intercalado y se tienen que insertar un dato de un subconjunto y otro del otro
-// donde se deben de hacer n pasos, pero a˙n asÌ se dividen en dos el n˙mero de elementos
+// Big O: O(n lg(n)) el peor caso es cuando el vector est√° intercalado y se tienen que insertar un dato de un subconjunto y otro del otro
+// donde se deben de hacer n pasos, pero a√∫n as√≠ se dividen en dos el n√∫mero de elementos
 void ordenaMerge(vector<vector<string>>&array,const int&p,const int&r){
 	if(p<r){
 		int q=(p+r)/2;
@@ -108,18 +108,18 @@ void ordenaMerge(vector<vector<string>>&array,const int&p,const int&r){
 	}
 }
 
-// Realiza una b˙squeda binaria
-// Par·metros:
+// Realiza una b√∫squeda binaria
+// Par√°metros:
 // array: vector de datos donde buscar
 // fecha: dato a buscar
 // Salida:
-// k: Ìndice de donde se encuentra el valor x (retorna -1 si no lo encuentra)
+// k: √≠ndice de donde se encuentra el valor x (retorna -1 si no lo encuentra)
 // Big Omega: Omega(1) El mejor caso es cuando el elemento que buscamos se 
-// encuentra justo en Ìndice central, tomando solo una iteraciÛn para encontrarlo.
+// encuentra justo en √≠ndice central, tomando solo una iteraci√≥n para encontrarlo.
 // Big Theta: Theta() El caso promedio es cuando se encuentra en un indice aproximadamente 
-// en 1/4 o 3/4 del tamaÒo del arreglo. Partiendo del razonamiento de Big O(lg n) tenemos que 
-// en promedio se realizar·n (lg n)/2 pasos. Entonces Theta(lg n)
-// Big O: O(lg n) el peor caso es cuando el elemento no se encuentra en el arreglo, pero cada iteraciÛn
+// en 1/4 o 3/4 del tama√±o del arreglo. Partiendo del razonamiento de Big O(lg n) tenemos que 
+// en promedio se realizar√°n (lg n)/2 pasos. Entonces Theta(lg n)
+// Big O: O(lg n) el peor caso es cuando el elemento no se encuentra en el arreglo, pero cada iteraci√≥n
 // divide a la mitad el rango en donde se ha de buscar, por eso ha de tener una complejidad de O(lg n)
 int busqBinaria(vector<vector<string>>&array, vector<string>&fecha){
 	int inf = 0;
@@ -133,8 +133,8 @@ int busqBinaria(vector<vector<string>>&array, vector<string>&fecha){
 	return -1;
 }
 
-//La siguiente funciÛn se encarga de leer la bit·cora y almacenarla en un vector 
-//de cadenas de caractÈres.
+//La siguiente funci√≥n se encarga de leer la bit√°cora y almacenarla en un vector 
+//de cadenas de caract√©res.
 // entrada:
 // bitacora: vector donde almacenar los registros
 // O(n)
@@ -182,7 +182,7 @@ void pedirFechas(vector<string>& inicio, vector<string>& fin){
 	fin.push_back(hora);
 }
 
-// Llena el reporte con la informaciÛn solicitada
+// Llena el reporte con la informaci√≥n solicitada
 //Entrada:
 // bitacora: vector ordenado de la bitacora
 // inicio: fecha inicial
