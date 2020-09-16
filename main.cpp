@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #define BITACORA "bitacora.txt"
+#define REPORTE "reporte.txt"
 using namespace std;
 
 //Pondera el valor del mes
@@ -34,6 +35,11 @@ bool comparadorFechasMenorQue(vector<string>&fecha1,vector<string>&fecha2){
 //O(1)
 bool comparadorFechasEq(vector<string>&fecha1,vector<string>&fecha2){
 	if(ponderadorMeses(fecha1[0])==ponderadorMeses(fecha2[0])&& atoi(fecha1[1].c_str())==atoi(fecha2[1].c_str()) && fecha1[2]==fecha2[2])return true;
+	return false;
+}
+
+bool compararDiaEq(vector<string>&fecha1,vector<string>&fecha2){
+	if(ponderadorMeses(fecha1[0])==ponderadorMeses(fecha2[0])&& atoi(fecha1[1].c_str())==atoi(fecha2[1].c_str()))return true;
 	return false;
 }
 
@@ -108,27 +114,18 @@ void ordenaMerge(vector<vector<string>>&array,const int&p,const int&r){
 	}
 }
 
-// Realiza una búsqueda binaria
-// Parámetros:
-// array: vector de datos donde buscar
-// fecha: dato a buscar
-// Salida:
-// k: índice de donde se encuentra el valor x (retorna -1 si no lo encuentra)
-// Big Omega: Omega(1) El mejor caso es cuando el elemento que buscamos se 
-// encuentra justo en índice central, tomando solo una iteración para encontrarlo.
-// Big Theta: Theta() El caso promedio es cuando se encuentra en un indice aproximadamente 
-// en 1/4 o 3/4 del tamaño del arreglo. Partiendo del razonamiento de Big O(lg n) tenemos que 
-// en promedio se realizarán (lg n)/2 pasos. Entonces Theta(lg n)
-// Big O: O(lg n) el peor caso es cuando el elemento no se encuentra en el arreglo, pero cada iteración
-// divide a la mitad el rango en donde se ha de buscar, por eso ha de tener una complejidad de O(lg n)
-int busqBinaria(vector<vector<string>>&array, vector<string>&fecha){
-	int inf = 0;
-	int sup = array.size()-1;
-	while(inf<sup){
-		float k = float(inf+sup)/2;
-		if(comparadorFechasEq(array[k],fecha)) return k;
-		else if(comparadorFechasMenorQue(array.at((int)k),fecha)) inf=ceil(k);
-		else sup = floor(k);
+int busqPrimeroDe(vector<vector<string>>&array, vector<string>&fecha){
+	int k = 0;
+	for(auto& x: array ){
+		if(compararDiaEq(x,fecha)) return k;
+		++k;
+	}
+	return -1;
+}
+
+int busqUltimoDe(vector<vector<string>>&array, vector<string>&fecha){
+	for(int k = array.size()-1;k>=0;--k){
+		if(compararDiaEq(array[k],fecha)) return k;
 	}
 	return -1;
 }
@@ -164,22 +161,18 @@ void leerBitacora(vector<vector<string>>&bitacora){
 // inicio: fecha inicial
 // fin: fecha final
 void pedirFechas(vector<string>& inicio, vector<string>& fin){
-	string linea, mes, dia, hora;
-	cout<<"Ingrese la la fecha de inicio: (Ejemplo Jun 17 22:26:54)\n";
+	string mes, dia;
+	cout<<"Ingrese la la fecha de inicio: (Ejemplo Jun 17)\n";
 	cin>>mes;
 	cin>>dia;
-	cin>>hora;
 	inicio.push_back(mes);
 	inicio.push_back(dia);
-	inicio.push_back(hora);
 
-	cout<<"Ingrese la la fecha final: (Ejemplo Oct 9 10:32:24) \n";
+	cout<<"Ingrese la la fecha final: (Ejemplo Oct 9) \n";
 	cin>>mes;
 	cin>>dia;
-	cin>>hora;
 	fin.push_back(mes);
 	fin.push_back(dia);
-	fin.push_back(hora);
 }
 
 // Llena el reporte con la información solicitada
@@ -188,7 +181,7 @@ void pedirFechas(vector<string>& inicio, vector<string>& fin){
 // inicio: fecha inicial
 // fin: fecha final
 void generarReporte(const vector<vector<string>>&bitacora, const int &inicio, const int &fin){
-	ofstream reporte("reporte.txt",ios::out);
+	ofstream reporte(REPORTE,ios::out);
 	for(int x=inicio;x<=fin;x++) {
 		for(int j=0;j<4;j++){
 			reporte<<bitacora.at(x)[j]<<" ";
@@ -197,6 +190,7 @@ void generarReporte(const vector<vector<string>>&bitacora, const int &inicio, co
 	}
 }
 
+
 int main(){
 	vector<vector<string>>bitacora;
 	leerBitacora(bitacora);
@@ -204,10 +198,9 @@ int main(){
 	vector<string>fechaInicio, fechaFin;
 	pedirFechas(fechaInicio, fechaFin);
 	
-	int inicio = busqBinaria(bitacora,fechaInicio);
-	int fin = busqBinaria(bitacora,fechaFin);
+	int inicio = busqPrimeroDe(bitacora,fechaInicio);
+	int fin = busqUltimoDe(bitacora,fechaFin);
 	
-	generarReporte(bitacora,inicio,fin);
 	for(int x=inicio;x<=fin;x++) {
 		for(int j=0;j<4;j++){
 			cout<<bitacora.at(x)[j]<<" ";
